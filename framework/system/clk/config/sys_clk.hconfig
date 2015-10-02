@@ -57,7 +57,15 @@ config USE_SYS_CLK
     ---help---
     IDH_HTML_Oscillator_System_Service_Library
     ---endhelp---
-	
+
+config SYS_CLK_MANAGER_PLUGIN_SELECT
+	string
+	depends on USE_SYS_CLK
+	default "mx1:MX1ClockModel" if DS60001168 || DS60001185 || DS60001290
+    default "mx2:MX2ClockModel" if DS60001143 || DS60001156 
+    default "mz:MZClockModel"  if DS60001191 || DS60001320
+    default "mzda:MZDAClockModel" if DS60001361	
+
 config USE_SYS_CLK_DYNAMIC_NEEDED
 	depends on USE_SYS_CLK
     bool
@@ -103,13 +111,6 @@ config SYS_CLK_FSOSCEN_OVERRIDE
     depends on USE_SYS_CLK
     default n
 
-config HAVE_REFCLOCK
-    bool
-    depends on USE_SYS_CLK
-    default n if DS60001143
-    default n if DS60001156
-    default y
-    
 config SYS_CLK_FRCDIV
 	string
 	depends on USE_SYS_CLK
@@ -261,6 +262,39 @@ config SYS_CLK_PBDIV7
     ---help---
 	IDH_HTML_CONFIGURATOR_Configuring_the_Peripheral_Bus_Clocks_MZ
     ---endhelp---
+
+endif
+
+ifblock HAVE_MPLL
+
+config SYS_CLK_MPLL_ENABLE
+    bool "Enable Memory PLL MPLL"
+    depends on USE_SYS_CLK && PIC32MZ
+    default n
+
+config SYS_CLK_MPLLIDIV
+    int "Select Memory PLL Input Divider MPLLIDIV (1-63)"
+    depends on USE_SYS_CLK && SYS_CLK_MPLL_ENABLE
+    default 1
+    range 1 63
+
+config SYS_CLK_MPLLMULT
+    int "Select Memory PLL Multiplier MPLLMULT (1-160)"
+    depends on USE_SYS_CLK && SYS_CLK_MPLL_ENABLE
+    default 160
+    range 1 160
+
+config SYS_CLK_MPLLODIV1
+    int "Select Memory PLL Output Divider #1 MPLLODIV1 (1-7)"
+    depends on USE_SYS_CLK && SYS_CLK_MPLL_ENABLE
+    default 7
+    range 1 7
+
+config SYS_CLK_MPLLODIV2
+    int "Select Memory PLL Output Divider #2 MPLLODIV2 (1-7)"
+    depends on USE_SYS_CLK && SYS_CLK_MPLL_ENABLE
+    default 7
+    range 1 7
 
 endif
 
@@ -559,6 +593,70 @@ config SYS_CLK_ROTRIM3
 	IDH_HTML_CONFIGURATOR_Configuring_the_Reference_Clocks_MZ
     ---endhelp---
 
+ifblock HAVE_REFCLOCK5
+
+config SYS_CLK_REFCLK4_ENABLE
+    bool "Enable Reference Clock REFCLKO5"
+    default n
+    depends on USE_SYS_CLK
+    ---help---
+	IDH_HTML_CONFIGURATOR_Configuring_the_Reference_Clocks_MZ
+    ---endhelp---
+    
+config SYS_CLK_REFCLK4_OE
+	bool "Reference Clock Output Enable OE"
+	default n 
+    depends on USE_SYS_CLK && SYS_CLK_REFCLK4_ENABLE
+    ---help---
+	IDH_HTML_CONFIGURATOR_Configuring_the_Reference_Clocks_MZ
+    ---endhelp---
+
+comment "**** WARNING: This clock output setting is not available for this device ****"
+	depends on USE_SYS_CLK && SYS_CLK_REFCLK4_ENABLE && SYS_CLK_REFCLK4_OE = y
+    
+config SYS_CLK_REFCLK_SOURCE4
+    string "Reference Clock Source Select ROSEL"
+    default "System Clock SYSCLK"
+    depends on USE_SYS_CLK && SYS_CLK_REFCLK4_ENABLE
+    range CLK_REFCLK_SOURCE_MZ
+    ---help---
+	IDH_HTML_CONFIGURATOR_Configuring_the_Reference_Clocks_MZ
+    ---endhelp---
+
+config SYS_CLK_REFCLK_ROSEL4
+    int
+    depends on USE_SYS_CLK && SYS_CLK_REFCLK4_ENABLE
+    default 0 if SYS_CLK_REFCLK_SOURCE4 = "System Clock SYSCLK"
+    default 1 if SYS_CLK_REFCLK_SOURCE4 = "Peripheral Clock PBCLK"
+    default 2 if SYS_CLK_REFCLK_SOURCE4 = "Primary Oscillator POSC"
+    default 3 if SYS_CLK_REFCLK_SOURCE4 = "Internal Fast Oscillator FRC"
+    default 4 if SYS_CLK_REFCLK_SOURCE4 = "Low-Power Oscillator LPRC"
+    default 5 if SYS_CLK_REFCLK_SOURCE4 = "Secondary Oscillator SOSC"
+    default 6 if SYS_CLK_REFCLK_SOURCE4 = "USB PLL UPLL"
+    default 7 if SYS_CLK_REFCLK_SOURCE4 = "System PLL output SPLL"
+    default 8 if SYS_CLK_REFCLK_SOURCE4 = "Reference Clock Input REFCLKIx"
+    default 9 if SYS_CLK_REFCLK_SOURCE4 = "Internal Backup FRC BFRC"
+    
+config SYS_CLK_RODIV4
+    int "Select Reference Clock Output Divider RODIV (0-65534)"
+    depends on USE_SYS_CLK && SYS_CLK_REFCLK4_ENABLE
+    default 0
+    range 0 65534
+    ---help---
+	IDH_HTML_CONFIGURATOR_Configuring_the_Reference_Clocks_MZ
+    ---endhelp---
+
+config SYS_CLK_ROTRIM4
+    int "Select Reference Clock Trim Value ROTRIM (0-511)"
+    depends on USE_SYS_CLK && SYS_CLK_REFCLK4_ENABLE
+    default 0
+    range 0 511
+    ---help---
+	IDH_HTML_CONFIGURATOR_Configuring_the_Reference_Clocks_MZ
+    ---endhelp---
+
+endif
+
 endif
     
 endif
@@ -758,6 +856,17 @@ config SYS_CLK_REFCLK3_FREQ
 	IDH_HTML_SYS_CLK_ReferenceClockFrequencyGet_CLK_BUSES_REFERENCE
     ---endhelp---
     
+config SYS_CLK_REFCLK4_FREQ
+    string "Reference Clock #5 Frequency (Hz)"
+    depends on USE_SYS_CLK && SYS_CLK_REFCLK4_ENABLE
+    persistent
+    default "200000000" if (DS60001191 || DS60001320)
+    default "80000000" if (DS60001143 || DS60001156 || DS60001185)
+    default "40000000" if (DS60001168 || DS60001290)
+    ---help---
+	IDH_HTML_SYS_CLK_ReferenceClockFrequencyGet_CLK_BUSES_REFERENCE
+    ---endhelp---
+    
 config SYS_CLK_UPLL_BEFORE_DIV2_FREQ
     string "USB PLL Clock Frequency (HZ)"
     depends on USE_SYS_CLK && PIC32MX
@@ -768,6 +877,11 @@ config SYS_CLK_UPLL_BEFORE_DIV2_FREQ
 	IDH_HTML_CONFIGURATOR_Configuring_the_USB_PLL_MX
     ---endhelp---
 
+config SYS_CLK_MPLL_FREQ
+    string "Memory PLL Output Frequency (Hz)"
+    depends on USE_SYS_CLK && SYS_CLK_MPLL_ENABLE
+    persistent
+    
 endmenu
 
 endmenu

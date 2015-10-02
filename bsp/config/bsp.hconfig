@@ -285,6 +285,8 @@ config BSP_PIC32MZ_EC_PIM_BT_AUDIO_DK
     depends on DS60001191
 	select BSP_TRIGGER
 	select BSP_POSC_24MHz
+    select USE_GFX_CRYSTAL_2_172x220_NEEDED if USE_GFX_STACK
+    select USE_DRV_GFX_OTM2201A_NEEDED if USE_GFX_STACK
     bool "PIC32MZ EC PIM w/ Bluetooth Audio Development Kit"
     ---help---
     IDH_HTML_BSP_pic32mz_ec_pim_bt_audio_dk
@@ -412,6 +414,8 @@ config BSP_PIC32MX_125_SK_LCC_PICTAIL_QVGA
     depends on DS60001290
 	select BSP_TRIGGER
 	select BSP_POSC_8MHz
+    select USE_GFX_TRULY_32_240X320_NEEDED if USE_GFX_STACK
+    select USE_DRV_GFX_LCC_NEEDED if USE_GFX_STACK
     bool "PIC32MX 1/2/5 Starter Kit w/ LCC Pictail+ and QVGA glass"
     ---help---
     IDH_HTML_BSP_pic32mx_125_sk_lcc_pictail_qvga
@@ -422,6 +426,8 @@ config BSP_PIC32MZ_EF_PIM_BT_AUDIO_DK
     depends on DS60001320
 	select BSP_TRIGGER
 	select BSP_POSC_24MHz
+    select USE_GFX_CRYSTAL_2_172x220_NEEDED if USE_GFX_STACK
+    select USE_DRV_GFX_OTM2201A_NEEDED if USE_GFX_STACK
     bool "PIC32MZ EF PIM w/ Bluetooth Audio Development Kit"
     ---help---
     IDH_HTML_BSP_pic32mz_ef_pim_bt_audio_dk
