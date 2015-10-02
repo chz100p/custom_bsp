@@ -456,7 +456,7 @@ config IOL1WAY
 config FUSBIDIO
 	string "USB USID Selection (FUSBIDIO)"
 	range DEVCFG_FUSBIDIO
-	default "ON"
+	default "OFF"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---
@@ -464,7 +464,7 @@ config FUSBIDIO
 config FVBUSONIO
 	string "USB VBUS ON Selection (FVBUSONIO)"
 	range DEVCFG_FVBUSONIO
-	default "ON"
+	default "OFF"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---
@@ -479,7 +479,7 @@ menu "DEVCFG2"
 config FPLLIDIV
 	string "PLL Input Divider (FPLLIDIV)"
 	range DEVCFG_FPLLIDIV
-	default "DIV_12"
+	default "DIV_1"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---
@@ -487,7 +487,7 @@ config FPLLIDIV
 config FPLLMUL
 	string "PLL Multiplier (FPLLMUL)"
 	range DEVCFG_FPLLMUL
-	default "MUL_24"
+	default "MUL_20"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---
@@ -495,7 +495,7 @@ config FPLLMUL
 config UPLLIDIV
 	string "USB PLL Input Divider (UPLLIDIV)"
 	range DEVCFG_UPLLIDIV
-	default "DIV_12"
+	default "DIV_1"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---
@@ -511,7 +511,7 @@ config UPLLEN
 config FPLLODIV
 	string "System PLL Output Clock Divider (FPLLODIV)"
 	range DEVCFG_FPLLODIV
-	default "DIV_256"
+	default "DIV_2"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---
@@ -526,7 +526,7 @@ menu "DEVCFG1"
 config FNOSC
 	string "Oscillator Selection Bits (FNOSC)"
 	range DEVCFG_FNOSC
-	default "FRCDIV"
+	default "PRIPLL"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---
@@ -534,7 +534,7 @@ config FNOSC
 config FSOSCEN
 	string "Secondary Oscillator Enable (FSOSCEN)"
 	range DEVCFG_FSOSCEN
-	default "ON"
+	default "OFF"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---
@@ -542,7 +542,7 @@ config FSOSCEN
 config IESO
 	string "Internal/External Switch Over (IESO)"
 	range DEVCFG_IESO
-	default "ON"
+	default "OFF"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---
@@ -550,7 +550,7 @@ config IESO
 config POSCMOD
 	string "Primary Oscillator Configuration (POSCMOD)"
 	range DEVCFG_POSCMOD
-	default "OFF"
+	default "HS"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---
@@ -566,7 +566,7 @@ config OSCIOFNC
 config FPBDIV
 	string "Peripheral Clock Divisor (FPBDIV)"
 	range DEVCFG_FPBDIV
-	default "DIV_8"
+	default "DIV_1"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---
@@ -598,7 +598,7 @@ config WINDIS
 config FWDTEN
 	string "Watchdog Timer Enable (FWDTEN)"
 	range DEVCFG_FWDTEN
-	default "ON"
+	default "OFF"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---
@@ -621,7 +621,7 @@ menu "DEVCFG0"
 config DEBUG
 	string "Background Debugger Enable (DEBUG)"
 	range DEVCFG_DEBUG
-	default "OFF"
+	default "ON"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---
@@ -629,7 +629,7 @@ config DEBUG
 config JTAGEN
 	string "JTAG Enable (JTAGEN)"
 	range DEVCFG_JTAGEN
-	default "ON"
+	default "OFF"
 	---help---
 	IDH_HTML_Configuration_Bit_Settings_for_PIC32MX270F256B
 	---endhelp---

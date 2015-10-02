@@ -17,6 +17,10 @@ config BSP_USE_USBSWITCH
     depends on USE_BSP
     bool 
 
+config BSP_POSC_4MHz
+    depends on USE_BSP
+    bool
+
 config BSP_POSC_8MHz
     depends on USE_BSP
     bool
@@ -38,7 +42,7 @@ choice
     depends on USE_BSP
     default BSP_PIC32MX460_PIM_E16 if DS60001143
     default BSP_PIC32MX_USB_SK2 if DS60001156
-    default BSP_PIC32MX_BT_SK if DS60001168
+    default BSP_PIC32MX230F064B if DS60001168
     default BSP_PIC32MX_USB_SK3 if DS60001185
     default BSP_PIC32MZ_EC_SK if DS60001191
     default BSP_PIC32MX_125_SK if DS60001290
@@ -215,6 +219,26 @@ config BSP_WIFI_G_DB
     IDH_HTML_BSP_wifi_g_db
     ---endhelp---
 	
+config BSP_PIC32MX230F064B
+    depends on USE_BSP
+    depends on DS60001168
+	select BSP_TRIGGER
+	select BSP_POSC_4MHz
+    bool "PIC32MX230F064B"
+    ---help---
+    IDH_HTML_BSP_pic32mx_bt_sk
+    ---endhelp---
+
+config BSP_PIC32MX270F256B_Bluetooth
+    depends on USE_BSP
+    depends on DS60001168
+	select BSP_TRIGGER
+	select BSP_POSC_4MHz
+    bool "PIC32MX270F256B Bluetooth"
+    ---help---
+    IDH_HTML_BSP_pic32mx_bt_sk
+    ---endhelp---
+
 config BSP_PIC32MX_BT_SK
     depends on USE_BSP
     depends on DS60001168
@@ -589,6 +613,20 @@ file BSP_wifi_g_db_BSP "$HARMONY_VERSION_PATH/bsp/wifi_g_db/xml/bsp.xml" to "$BS
 file BSP_wifi_g_db_H "$HARMONY_VERSION_PATH/bsp/wifi_g_db/bsp_config.h" to "$PROJECT_HEADER_FILES/bsp/wifi_g_db/bsp_config.h"
 file BSP_wifi_g_db_C "$HARMONY_VERSION_PATH/bsp/wifi_g_db/bsp_sys_init.c" to "$PROJECT_SOURCE_FILES/bsp/wifi_g_db/bsp_sys_init.c"
 compiler BSP_COMPILER_INCLUDE_wifi_g_db includepath "$HARMONY_VERSION_PATH/bsp/wifi_g_db"
+endif
+
+ifblock BSP_PIC32MX230F064B
+file BSP_pic32mx230f064b_BSP "$HARMONY_VERSION_PATH/bsp/pic32mx230f064b/xml/bsp.xml" to "$BSP_CONFIGURATION_XML"
+file BSP_pic32mx230f064b_H "$HARMONY_VERSION_PATH/bsp/pic32mx230f064b/bsp_config.h" to "$PROJECT_HEADER_FILES/bsp/pic32mx230f064b/bsp_config.h"
+file BPS_pic32mx230f064b_C "$HARMONY_VERSION_PATH/bsp/pic32mx230f064b/bsp_sys_init.c" to "$PROJECT_SOURCE_FILES/bsp/pic32mx230f064b/bsp_sys_init.c"
+compiler BSP_COMPILER_INCLUDE_pic32mx230f064b includepath "$HARMONY_VERSION_PATH/bsp/pic32mx230f064b"
+endif
+
+ifblock BSP_PIC32MX270F256B_Bluetooth
+file BSP_pic32mx270f256b_blue_BSP "$HARMONY_VERSION_PATH/bsp/pic32mx270f256b_blue/xml/bsp.xml" to "$BSP_CONFIGURATION_XML"
+file BSP_pic32mx270f256b_blue_H "$HARMONY_VERSION_PATH/bsp/pic32mx270f256b_blue/bsp_config.h" to "$PROJECT_HEADER_FILES/bsp/pic32mx270f256b_blue/bsp_config.h"
+file BSP_pic32mx270f256b_blue_C "$HARMONY_VERSION_PATH/bsp/pic32mx270f256b_blue/bsp_sys_init.c" to "$PROJECT_SOURCE_FILES/bsp/pic32mx270f256b_blue/bsp_sys_init.c"
+compiler BSP_COMPILER_INCLUDE_pic32mx270f256b_blue includepath "$HARMONY_VERSION_PATH/bsp/pic32mx270f256b_blue"
 endif
 
 ifblock BSP_PIC32MX_BT_SK
