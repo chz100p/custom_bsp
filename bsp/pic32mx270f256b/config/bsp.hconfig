@@ -1,0 +1,8 @@
+
+ifblock BSP_PIC32MX270F256B
+file BSP_pic32mx270f256b_BSP "$HARMONY_VERSION_PATH/bsp/pic32mx270f256b/xml/bsp.xml" to "$BSP_CONFIGURATION_XML"
+file BSP_pic32mx270f256b_H "$HARMONY_VERSION_PATH/bsp/pic32mx270f256b/bsp_config.h" to "$PROJECT_HEADER_FILES/bsp/pic32mx270f256b/bsp_config.h"
+file BSP_pic32mx270f256b_C "$HARMONY_VERSION_PATH/bsp/pic32mx270f256b/bsp_sys_init.c" to "$PROJECT_SOURCE_FILES/bsp/pic32mx270f256b/bsp_sys_init.c"
+compiler BSP_COMPILER_INCLUDE_pic32mx270f256b includepath "$HARMONY_VERSION_PATH/bsp/pic32mx270f256b"
+endif
+

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0"?>
+<bsp name="pic32mx270f256b">
+    <function name="SWITCH_1" pin="RB15" mode="digital" pullup="true"/>
+    <function name="SWITCH_2" pin="RB14" mode="digital" pullup="true"/>
+    <function name="SWITCH_3" pin="RB13" mode="digital" pullup="true"/>
+    <function name="LED_1" pin="RA0" mode="digital" direction="out"/>
+    <function name="LED_2" pin="RA1" mode="digital" direction="out"/>
+    <function name="LED_3" pin="RA4" mode="digital" direction="out"/>
+</bsp>

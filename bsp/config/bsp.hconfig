@@ -25,6 +25,10 @@ config BSP_POSC_12MHz
     depends on USE_BSP
     bool
 
+config BSP_POSC_20MHz
+    depends on USE_BSP
+    bool
+
 config BSP_POSC_24MHz
     depends on USE_BSP
     bool
@@ -38,7 +42,7 @@ choice
     depends on USE_BSP
     default BSP_PIC32MX460_PIM_E16 if DS60001143
     default BSP_PIC32MX_USB_SK2 if DS60001156
-    default BSP_PIC32MX_BT_SK if DS60001168
+    default BSP_PIC32MX270F256B if DS60001168
     default BSP_PIC32MX_USB_SK3 if DS60001185
     default BSP_PIC32MZ_EC_SK if DS60001191
     default BSP_PIC32MX_125_SK if DS60001290
@@ -214,6 +218,16 @@ config BSP_WIFI_G_DB
     bool "Wi-Fi G Demo Board"
     ---help---
     IDH_HTML_BSP_wifi_g_db
+    ---endhelp---
+	
+config BSP_PIC32MX270F256B
+    depends on USE_BSP
+    depends on DS60001168
+	select BSP_TRIGGER
+	select BSP_POSC_20MHz
+    bool "PIC32MX270F256B"
+    ---help---
+    IDH_HTML_BSP_pic32mx_bt_sk
     ---endhelp---
 	
 config BSP_PIC32MX_BT_SK
@@ -491,6 +505,7 @@ config BSP_PIC32MZ_EF_SK_S1D_PICTAIL_WQVGA
 	
 endchoice	
 
+source "$HARMONY_VERSION_PATH/bsp/pic32mx270f256b/config/bsp.hconfig"
 
 source "$HARMONY_VERSION_PATH/bsp/pic32mx460_pim+e16/config/bsp.hconfig"
 

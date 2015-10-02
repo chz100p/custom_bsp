@@ -568,6 +568,7 @@ config SYS_CLK_CONFIG_PRIMARY_XTAL
     depends on USE_SYS_CLK
     default "24000000" if BSP_POSC_24MHz = y || PIC32MZ = y
     default "12000000" if BSP_POSC_12MHz = y
+    default "20000000" if PIC32MX = y
     default "8000000" if BSP_POSC_8MHz = y || PIC32MX = y
     ---help---
 	IDH_HTML_SYS_CLK_CONFIG_PRIMARY_XTAL
